@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="js/bootstrap.js" type="text/javascript"></script>
+		<script src="js/modernizr-custom.js" type="text/javascript"></script>
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+		<title>Sistema de Gestão de Performance</title>
+		<style>
+			body {
+				padding-bottom: 70px;
+			}
+			.footer {
+				background-color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-offset-3">
+					<div class="col-sm-12">
+						<label class="control-label">Nome:</label>
+						<span>Fulano de Tal</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h3 style="color:#F57A20"><small style="color:#F57A20">Programa de</small><br/> Gestão de Performance</h3>
+					
+					<div id="MainMenu">
+						<div class="list-group panel">
+							<a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Processo 2015</a>
+							<div class="collapse" id="demo3">
+								<a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Lista de Atividades <i class="fa fa-caret-down"></i></a>
+								<div class="collapse list-group-submenu" id="SubMenu1">
+									<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 1 a</a>
+									<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 2 b</a>
+									<a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Subitem 3 c <i class="fa fa-caret-down"></i></a>
+									<div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
+										<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
+										<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
+									</div>
+									<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 4 d</a>
+								</div>
+								<a href="javascript:;" class="list-group-item">Subitem 2</a>
+								<a href="javascript:;" class="list-group-item">Subitem 3</a>
+							</div>
+							<a href="#demo4" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Item 4</a>
+							<div class="collapse" id="demo4">
+								<a href="" class="list-group-item">Subitem 1</a>
+								<a href="" class="list-group-item">Subitem 2</a>
+								<a href="" class="list-group-item">Subitem 3</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-9">
+					<div class="row">
+						<div class="panel-group">
+							<div class="panel panel-default">
+								<div class="panel-heading"><strong>Dados Gerais</strong></div>
+								<div class="panel-body">
+									<div class="row">
+										<label class="col-sm-1 control-label">Funcional:</label>
+										<div class="col-sm-11">
+											999999999
+										</div>
+									</div>
+									<div class="row">
+										<label class="col-sm-1 control-label">Nome:</label>
+										<div class="col-sm-11">
+											Fulano de Tal
+										</div>
+									</div>
+									<div class="row">
+										<label class="col-sm-1 control-label">Etapa:</label>
+										<div class="col-sm-11">
+											Avaliação Comportamental
+										</div>
+									</div>
+									<div class="row">
+										<label class="col-sm-1 control-label">Cargo:</label>
+										<div class="col-sm-11">
+											Gerente
+										</div>
+									</div>
+									<div class="row">
+										<label class="col-sm-1 control-label">Status:</label>
+										<div class="col-sm-11">
+											Finalizada
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="panel panel-default">
+									<div class="panel-heading"><strong>AVALIAÇÃO COMPORTAMENTAL</strong></div>
+									<div class="panel-body">
+										<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+											<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="headingOne">
+													<h4 class="panel-title">
+													<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+														Foco no Cliente
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+													<div class="panel-body">
+														<ul class="list-unstyled">
+															<li>Sabe identificar as necessidades do cliente e dá transparência em relação aos riscos envolvidos.</li>
+															<li>Não cumpre as metas a qualquer custo, pois sabe que uma relação sustentável com o cliente é soberana.</li>
+															<li>Atende com excelência e com foco na satisfação do cliente do banco, não importa em qual área trabalhe.</li>
+														</ul>
+														<div class="table-responsive">
+															<table class="table table-condensed">
+																<tbody class="text-center">
+																	<tr>
+																		<td></td>
+																		<td>Insatisfatório</td>
+																		<td>Em Desenvolvimento</td>
+																		<td>Aderente</td>
+																		<td>Excelente</td>
+																		<td>Referência</td>
+																		<td></td>
+																	</tr>
+																	<tr>
+																		<td>Autoavaliação</td>
+																		<td>1</td>
+																		<td>2</td>
+																		<td>3</td>
+																		<td>4</td>
+																		<td>5</td>
+																		<td>NA</td>
+																	</tr>
+																	<tr>
+																		<td>4</td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="panel panel-success">
+												<div class="panel-heading" role="tab" id="headingTwo">
+													<h4 class="panel-title">
+													<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+														Foco na Performance
+													</a>
+													</h4>
+												</div>
+												<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+													<div class="panel-body">
+														<ul class="list-unstyled">
+															<li>Propõe metas ambiciosas e sustentáveis, não se intimida frente aos desafios recebidos e dedica-se a ir além do esperado, sem expor o conglomerado a riscos que excedam nosso apetite.</li>
+															<li>Não se restringe às suas metas individuais, fazendo a diferença para a organização no curto e no longo prazo.</li>
+															<li>Não perde jamais de vista o uso eficiente dos recursos da organização.</li>
+														</ul>
+														<div class="table-responsive">
+															<table class="table table-condensed table-centered">
+																<tbody class="text-center">
+																	<tr>
+																		<td></td>
+																		<td>Insatisfatório</td>
+																		<td>Em Desenvolvimento</td>
+																		<td>Aderente</td>
+																		<td>Excelente</td>
+																		<td>Referência</td>
+																		<td></td>
+																	</tr>
+																	<tr>
+																		<td>Autoavaliação</td>
+																		<td>1</td>
+																		<td>2</td>
+																		<td>3</td>
+																		<td>4</td>
+																		<td>5</td>
+																		<td>NA</td>
+																	</tr>
+																	<tr>
+																		<td>4</td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																		<td><input type="radio" class="radio radio-inline"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<div class="text-center">
+									<button class="btn btn-sm btn-primary">Voltar</button>
+									<button class="btn btn-sm btn-primary">Reabrir Avaliação</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/bootlint.js" type="text/javascript"></script>
+	</body>
+</html>
