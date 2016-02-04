@@ -1,0 +1,1688 @@
+<html xml:space="default"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><meta content="width=device-width, initial-scale=1" name="viewport"><meta content="no-cache" http-equiv="Cache-Control"><meta content="no-cache" http-equiv="Pragma"><meta content="-1" http-equiv="Expires"><meta content="IE=EDGE,chrome=1" http-equiv="X-UA-Compatible"><title>Sistema Gestão de Performance</title><base target="_self"><link type="text/css" href="/tj/siume/estilo/bootstrap.css" rel="stylesheet"><script src="/tj/siume/js/lib/jquery-1.11.3.js" type="text/javascript"></script><script src="/tj/siume/app/bundle/jquery.i18n.properties.js" type="text/javascript"></script><script src="/tj/siume/app/bundle/loadBundle.js" type="text/javascript"></script><script type="text/javascript">
+					
+						var msg = 'Função desativada!';
+						var asciiF12 = 123;
+						var idioma = window.parent.document.getElementById('codidiom').value;
+						$(document).ready(function() {
+							$('body').on('keydown', function(event) {
+								var key = event.which;
+								if(((key == 68 || key == 78) && event.ctrlKey) || key == 122) {
+									alert("Atenção: Esta função está desabilitada!");
+									event.returnValue = false;
+									return false;
+								}
+							});
+							loadLang(idioma);
+						});
+						
+						function setTextoMensagemErro(msg) {
+							msg = jQuery.trim(msg);
+							$('#mensagemErro').css('height','auto');
+							$('#mensagemErro').html(msg);
+							$('html,body').animate({scrollTop:$('#mensagemErro').scrollTop()});
+						}
+						
+						function limparErros() {
+							$("#divErros").html('');
+							$("#divErros").toggle();
+						}
+						
+						function escondeAguarde() {
+							$('#aguarde').toggle();
+						}	
+						
+						function mostraAguarde() {
+							$('#aguarde').toggle();
+						}
+						
+						if(top && top.escondeAguarde){
+							top.escondeAguarde();
+						} else {	
+							escondeAguarde();
+						}
+					
+				</script></head><body style="cursor: default;"><input value="" name="codidiom" id="codidiom" type="hidden"><div class="container-fluid"><div style="font-weight:bold;" class="text-danger text-center" id="mensagemErro"></div><div id="divConteudo" class="row"><div class="col-xs-12"><div class="panel panel-default"><div class="bg-cinza panel-body"><div class="row"><div class="col-xs-9"><div class="row"><div class="col-xs-1"><strong><span data-id="formPreenchimentoEixoX2.campo.nome" class="unidadesExternas">Nome</span></strong></div><div class="col-xs-11">NAYARA GOMES DOS SANTOS - 007293913</div></div><div class="row"><div class="col-xs-1"><strong><span class="unidadesExternas" data-id="formPreenchimentoEixoX.campo.cargo">Cargo</span></strong></div><div class="col-xs-11">COORD GESTAO PERF</div></div><div class="row"><div class="col-xs-1"><strong><span class="unidadesExternas" data-id="formPreenchimentoEixoX.campo.gestor">Gestor</span></strong></div><div class="col-xs-11">JULIANA DE SOUZA MARTINS</div></div><div class="row"><div class="col-xs-1"><strong><span class="unidadesExternas" data-id="formPreenchimentoEixoX.campo.etapa">Etapa</span></strong></div><div class="col-xs-11">Preenchimento</div></div><div class="row"><div class="col-xs-1"><strong><span class="unidadesExternas" data-id="formPreenchimentoEixoX.campo.status">Status</span></strong></div><div id="status" class="col-xs-11">Não submetido para aprovação</div></div></div><div class="col-xs-3"><div class="row"><ul style="margin:0;" class="list-unstyled list-inline"><li><a href="javascript:prepararImpressao();" onmouseover="changeImage('imp','/tj/siume/imagem/icones/impressao_over.gif');" onmousedown="changeImage('imp','/tj/siume/imagem/icones/impressao_down.gif');" onmouseout="changeImage('imp','/tj/siume/imagem/icones/impressao_out.gif');"><img name="imp" src="/tj/siume/imagem/icones/impressao_out.gif" alt="Impressão" data-id="formPreenchimentoEixoX2.alt.impressao" class="unidadesExternas"></a></li><li><a href="javascript:verificarPermissao(document.forms[0].usuarioEA.value, document.forms[0].usuarioTR.value, document.forms[0].usuarioTR.value, '000000430', buscaContratoAnterior, ['']);"><img name="impAnt" src="/tj/siume/imagem/icones/impressao_out_ctr_ant_pt.gif" alt="Impressão" data-id="formPreenchimentoEixoX.alt.impressao" class="unidadesExternas" border="0"></a></li></ul></div></div></div></div></div></div><div class="col-xs-12"><div class="panel panel-default"><div style="padding:5px;" class="panel-body bg-cinza"><div class="center-block text-center"><ul style="margin:0;" class="list-unstyled list-inline"><li><div id="expandirTudo" style="cursor:pointer;"><img style="margin-top:-3px;margin-right:2px;" src="/tj/siume/imagem/btnArvExpande.gif"><span data-id="formPreenchimentoEixoX2.campo.expandir_tudo" class="unidadesExternas">Expandir Tudo</span></div></li><li><div id="fecharTudo" style="cursor:pointer;"><img style="margin-top:-3px;margin-right:2px;" src="/tj/siume/imagem/btnArvContrai.gif"><span data-id="formPreenchimentoEixoX2.campo.fechar_tudo" class="unidadesExternas">Fechar Tudo</span></div></li></ul></div></div></div></div><div class="col-xs-12"><div style="display:none;color:red;" id="divErros"></div></div><div class="col-xs-12"><div class="panel panel-default"><div class="panel-body"><div class="col-xs-2"><div class="row text-center"><div style="line-height:84px;"><strong><span class="unidadesExternas" data-id="formPreenchimentoEixoX.campo.natureza">Natureza:</span></strong><select id="cboNatureza" onchange="verificaPreenchimento();"><option value="01" data-id="formPreenchimentoEixoX2.option.nao_informada" class="unidadesExternas">Não Informada</option><option value="02" selected="" data-id="formPreenchimentoEixoX2.option.negocio" class="unidadesExternas">Negócio</option><option value="05" data-id="formPreenchimentoEixoX2.option.suporte" class="unidadesExternas">Suporte</option></select></div></div></div><div class="col-xs-10"><div class="row"><span class="unidadesExternas" data-id="formPreenchimentoEixoX.campo.natureza_negocio"><strong>Natureza Negócio:</strong> são as áreas que possuem indicadores financeiros bem definidos para medir o impacto de sua atuação no desempenho econômico da empresa. Apresentam, em geral, objetivos comerciais e o contrato de metas pode ser representado por indicadores como PB, RGO, Criação de Valor, Market Share e RAROC, por exemplo.</span></div><div class="row"><span class="unidadesExternas" data-id="formPreenchimentoEixoX.campo.natureza_suporte"><strong>Natureza Suporte:</strong> são as áreas que desenvolvem processos e/ou projetos com o objetivo de dar suporte aos negócios da empresa. O contrato de metas geralmente contempla despesas, projetos, pesquisa de satisfação de clientes internos e indicadores de processos, como por exemplo, SLAs.</span></div></div></div></div></div><div id="divFormulario"><div id="foco_01000" class="col-xs-12" peso="10000" descniv="" optaplic=""><div class="panel panel-default"><div class="panel-heading"><strong>CATEGORIAS DE METAS</strong><div id="pesoTotal" class="pull-right">100,00%</div></div><div style="padding-bottom:0px;" class="panel-body"><div id="bloco_01400" peso="10000" descniv="" optaplic="" nomebloco="FINANCEIRA" class="panel panel-success"><div class="panel-heading" data-target="#nivel_01400" data-toggle="collapse" role="button" aria-expanded="true"><img id="spnBotao_01400" src="/tj/siume/imagem/elemento/menos_transparente.png" style="margin-top:-3px;margin-right:2px;background-color:#4EFF00;"><strong>FINANCEIRA</strong><div id="peso_01400" class="pull-right">100,00%
+													</div></div><div id="nivel_01400" cdnivel="01400" class="panel-body expandido collapse in" aria-expanded="true"><div class="col-xs-12" style="font-size:12px;">
+    <div class="row">
+		<div class="col-xs-12" style="color:#848AB3;">
+			<strong>Legenda:</strong>
+			<ul class="list-unstyled">
+				<li>N1 - Não cumpriu o desafio contratado;</li>
+				<li>N2 - Cumpriu parcialmente o desafio contratado;</li>
+				<li>N3 - Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado);</li>
+				<li>N4 - Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado);</li>
+				<li>N5 - Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado).</li>
+			</ul>
+		</div>
+	</div> 
+	<div class="row">
+		<div class="col-xs-12">
+			<table class="table table-bordered table-condensed" style="font-size:12px;">
+				<thead style="background-color:#E6E6E6;">
+					<tr>
+						<th>Metas</th>
+						<th class="text-center">Peso %</th>
+						<th class="text-center">Registro dos Ns</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr coditem="01401" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01401" name="txtArea_01401" coditem="01401" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)">teste
+</textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01401" name="peso_01401" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="100,00" coditem="01401" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01401">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01401" id="rdoNumerico_01401" name="rdoTipoNivelAtingimento_01401" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01401');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01401">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01401">N1</span>
+															<input class="form-control" id="N1_01401" coditem="01401" type="text" value="1,0000" aria-describedby="n1addon01401" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01401" style="cursor:pointer;" onclick="showContent('#N1_01401')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01401">N2</span>
+															<input class="form-control" id="N2_01401" coditem="01401" type="text" value="0,0000" aria-describedby="n2addon01401" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01401" style="cursor:pointer;" onclick="showContent('#N2_01401')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01401">N3</span>
+															<input class="form-control" id="N3_01401" coditem="01401" type="text" value="3,0000" aria-describedby="n3addon01401" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01401" style="cursor:pointer;" onclick="showContent('#N3_01401')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01401">N4</span>
+															<input class="form-control" id="N4_01401" coditem="01401" type="text" value="0,0000" aria-describedby="n4addon01401" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01401" style="cursor:pointer;" onclick="showContent('#N4_01401')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01401">N5</span>
+															<input class="form-control" id="N5_01401" coditem="01401" type="text" value="5,0000" aria-describedby="n5addon01401" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01401" style="cursor:pointer;" onclick="showContent('#N5_01401')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01402" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01402" name="txtArea_01402" coditem="01402" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01402" name="peso_01402" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01402" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01402">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01402" id="rdoNumerico_01402" name="rdoTipoNivelAtingimento_01402" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01402');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01402">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01402">N1</span>
+															<input class="form-control" id="N1_01402" coditem="01402" type="text" value="0,0000" aria-describedby="n1addon01402" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01402" style="cursor:pointer;" onclick="showContent('#N1_01402')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01402">N2</span>
+															<input class="form-control" id="N2_01402" coditem="01402" type="text" value="0,0000" aria-describedby="n2addon01402" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01402" style="cursor:pointer;" onclick="showContent('#N2_01402')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01402">N3</span>
+															<input class="form-control" id="N3_01402" coditem="01402" type="text" value="0,0000" aria-describedby="n3addon01402" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01402" style="cursor:pointer;" onclick="showContent('#N3_01402')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01402">N4</span>
+															<input class="form-control" id="N4_01402" coditem="01402" type="text" value="0,0000" aria-describedby="n4addon01402" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01402" style="cursor:pointer;" onclick="showContent('#N4_01402')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01402">N5</span>
+															<input class="form-control" id="N5_01402" coditem="01402" type="text" value="0,0000" aria-describedby="n5addon01402" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01402" style="cursor:pointer;" onclick="showContent('#N5_01402')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01403" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01403" name="txtArea_01403" coditem="01403" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01403" name="peso_01403" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01403" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01403">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01403" id="rdoNumerico_01403" name="rdoTipoNivelAtingimento_01403" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01403');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01403">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01403">N1</span>
+															<input class="form-control" id="N1_01403" coditem="01403" type="text" value="0,0000" aria-describedby="n1addon01403" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01403" style="cursor:pointer;" onclick="showContent('#N1_01403')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01403">N2</span>
+															<input class="form-control" id="N2_01403" coditem="01403" type="text" value="0,0000" aria-describedby="n2addon01403" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01403" style="cursor:pointer;" onclick="showContent('#N2_01403')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01403">N3</span>
+															<input class="form-control" id="N3_01403" coditem="01403" type="text" value="0,0000" aria-describedby="n3addon01403" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01403" style="cursor:pointer;" onclick="showContent('#N3_01403')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01403">N4</span>
+															<input class="form-control" id="N4_01403" coditem="01403" type="text" value="0,0000" aria-describedby="n4addon01403" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01403" style="cursor:pointer;" onclick="showContent('#N4_01403')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01403">N5</span>
+															<input class="form-control" id="N5_01403" coditem="01403" type="text" value="0,0000" aria-describedby="n5addon01403" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01403" style="cursor:pointer;" onclick="showContent('#N5_01403')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01404" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01404" name="txtArea_01404" coditem="01404" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01404" name="peso_01404" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01404" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01404">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01404" id="rdoNumerico_01404" name="rdoTipoNivelAtingimento_01404" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01404');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01404">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01404">N1</span>
+															<input class="form-control" id="N1_01404" coditem="01404" type="text" value="0,0000" aria-describedby="n1addon01404" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01404" style="cursor:pointer;" onclick="showContent('#N1_01404')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01404">N2</span>
+															<input class="form-control" id="N2_01404" coditem="01404" type="text" value="0,0000" aria-describedby="n2addon01404" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01404" style="cursor:pointer;" onclick="showContent('#N2_01404')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01404">N3</span>
+															<input class="form-control" id="N3_01404" coditem="01404" type="text" value="0,0000" aria-describedby="n3addon01404" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01404" style="cursor:pointer;" onclick="showContent('#N3_01404')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01404">N4</span>
+															<input class="form-control" id="N4_01404" coditem="01404" type="text" value="0,0000" aria-describedby="n4addon01404" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01404" style="cursor:pointer;" onclick="showContent('#N4_01404')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01404">N5</span>
+															<input class="form-control" id="N5_01404" coditem="01404" type="text" value="0,0000" aria-describedby="n5addon01404" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01404" style="cursor:pointer;" onclick="showContent('#N5_01404')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01405" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01405" name="txtArea_01405" coditem="01405" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01405" name="peso_01405" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01405" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01405">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01405" id="rdoNumerico_01405" name="rdoTipoNivelAtingimento_01405" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01405');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01405">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01405">N1</span>
+															<input class="form-control" id="N1_01405" coditem="01405" type="text" value="0,0000" aria-describedby="n1addon01405" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01405" style="cursor:pointer;" onclick="showContent('#N1_01405')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01405">N2</span>
+															<input class="form-control" id="N2_01405" coditem="01405" type="text" value="0,0000" aria-describedby="n2addon01405" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01405" style="cursor:pointer;" onclick="showContent('#N2_01405')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01405">N3</span>
+															<input class="form-control" id="N3_01405" coditem="01405" type="text" value="0,0000" aria-describedby="n3addon01405" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01405" style="cursor:pointer;" onclick="showContent('#N3_01405')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01405">N4</span>
+															<input class="form-control" id="N4_01405" coditem="01405" type="text" value="0,0000" aria-describedby="n4addon01405" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01405" style="cursor:pointer;" onclick="showContent('#N4_01405')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01405">N5</span>
+															<input class="form-control" id="N5_01405" coditem="01405" type="text" value="0,0000" aria-describedby="n5addon01405" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01405" style="cursor:pointer;" onclick="showContent('#N5_01405')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01406" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01406" name="txtArea_01406" coditem="01406" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01406" name="peso_01406" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01406" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01406">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01406" id="rdoNumerico_01406" name="rdoTipoNivelAtingimento_01406" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01406');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01406">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01406">N1</span>
+															<input class="form-control" id="N1_01406" coditem="01406" type="text" value="0,0000" aria-describedby="n1addon01406" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01406" style="cursor:pointer;" onclick="showContent('#N1_01406')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01406">N2</span>
+															<input class="form-control" id="N2_01406" coditem="01406" type="text" value="0,0000" aria-describedby="n2addon01406" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01406" style="cursor:pointer;" onclick="showContent('#N2_01406')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01406">N3</span>
+															<input class="form-control" id="N3_01406" coditem="01406" type="text" value="0,0000" aria-describedby="n3addon01406" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01406" style="cursor:pointer;" onclick="showContent('#N3_01406')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01406">N4</span>
+															<input class="form-control" id="N4_01406" coditem="01406" type="text" value="0,0000" aria-describedby="n4addon01406" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01406" style="cursor:pointer;" onclick="showContent('#N4_01406')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01406">N5</span>
+															<input class="form-control" id="N5_01406" coditem="01406" type="text" value="0,0000" aria-describedby="n5addon01406" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01406" style="cursor:pointer;" onclick="showContent('#N5_01406')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01407" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01407" name="txtArea_01407" coditem="01407" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01407" name="peso_01407" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01407" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01407">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01407" id="rdoNumerico_01407" name="rdoTipoNivelAtingimento_01407" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01407');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01407">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01407">N1</span>
+															<input class="form-control" id="N1_01407" coditem="01407" type="text" value="0,0000" aria-describedby="n1addon01407" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01407" style="cursor:pointer;" onclick="showContent('#N1_01407')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01407">N2</span>
+															<input class="form-control" id="N2_01407" coditem="01407" type="text" value="0,0000" aria-describedby="n2addon01407" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01407" style="cursor:pointer;" onclick="showContent('#N2_01407')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01407">N3</span>
+															<input class="form-control" id="N3_01407" coditem="01407" type="text" value="0,0000" aria-describedby="n3addon01407" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01407" style="cursor:pointer;" onclick="showContent('#N3_01407')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01407">N4</span>
+															<input class="form-control" id="N4_01407" coditem="01407" type="text" value="0,0000" aria-describedby="n4addon01407" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01407" style="cursor:pointer;" onclick="showContent('#N4_01407')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01407">N5</span>
+															<input class="form-control" id="N5_01407" coditem="01407" type="text" value="0,0000" aria-describedby="n5addon01407" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01407" style="cursor:pointer;" onclick="showContent('#N5_01407')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01408" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01408" name="txtArea_01408" coditem="01408" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01408" name="peso_01408" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01408" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01408">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01408" id="rdoNumerico_01408" name="rdoTipoNivelAtingimento_01408" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01408');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01408">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01408">N1</span>
+															<input class="form-control" id="N1_01408" coditem="01408" type="text" value="0,0000" aria-describedby="n1addon01408" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01408" style="cursor:pointer;" onclick="showContent('#N1_01408')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01408">N2</span>
+															<input class="form-control" id="N2_01408" coditem="01408" type="text" value="0,0000" aria-describedby="n2addon01408" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01408" style="cursor:pointer;" onclick="showContent('#N2_01408')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01408">N3</span>
+															<input class="form-control" id="N3_01408" coditem="01408" type="text" value="0,0000" aria-describedby="n3addon01408" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01408" style="cursor:pointer;" onclick="showContent('#N3_01408')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01408">N4</span>
+															<input class="form-control" id="N4_01408" coditem="01408" type="text" value="0,0000" aria-describedby="n4addon01408" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01408" style="cursor:pointer;" onclick="showContent('#N4_01408')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01408">N5</span>
+															<input class="form-control" id="N5_01408" coditem="01408" type="text" value="0,0000" aria-describedby="n5addon01408" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01408" style="cursor:pointer;" onclick="showContent('#N5_01408')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01409" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01409" name="txtArea_01409" coditem="01409" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01409" name="peso_01409" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01409" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01409">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01409" id="rdoNumerico_01409" name="rdoTipoNivelAtingimento_01409" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01409');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01409">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01409">N1</span>
+															<input class="form-control" id="N1_01409" coditem="01409" type="text" value="0,0000" aria-describedby="n1addon01409" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01409" style="cursor:pointer;" onclick="showContent('#N1_01409')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01409">N2</span>
+															<input class="form-control" id="N2_01409" coditem="01409" type="text" value="0,0000" aria-describedby="n2addon01409" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01409" style="cursor:pointer;" onclick="showContent('#N2_01409')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01409">N3</span>
+															<input class="form-control" id="N3_01409" coditem="01409" type="text" value="0,0000" aria-describedby="n3addon01409" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01409" style="cursor:pointer;" onclick="showContent('#N3_01409')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01409">N4</span>
+															<input class="form-control" id="N4_01409" coditem="01409" type="text" value="0,0000" aria-describedby="n4addon01409" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01409" style="cursor:pointer;" onclick="showContent('#N4_01409')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01409">N5</span>
+															<input class="form-control" id="N5_01409" coditem="01409" type="text" value="0,0000" aria-describedby="n5addon01409" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01409" style="cursor:pointer;" onclick="showContent('#N5_01409')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01410" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01410" name="txtArea_01410" coditem="01410" class="form-control" style="width: 100%; min-height: 245px; height: 244px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01410" name="peso_01410" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01410" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01410">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01410" id="rdoNumerico_01410" name="rdoTipoNivelAtingimento_01410" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01410');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01410">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01410">N1</span>
+															<input class="form-control" id="N1_01410" coditem="01410" type="text" value="0,0000" aria-describedby="n1addon01410" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01410" style="cursor:pointer;" onclick="showContent('#N1_01410')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01410">N2</span>
+															<input class="form-control" id="N2_01410" coditem="01410" type="text" value="0,0000" aria-describedby="n2addon01410" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01410" style="cursor:pointer;" onclick="showContent('#N2_01410')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01410">N3</span>
+															<input class="form-control" id="N3_01410" coditem="01410" type="text" value="0,0000" aria-describedby="n3addon01410" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01410" style="cursor:pointer;" onclick="showContent('#N3_01410')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01410">N4</span>
+															<input class="form-control" id="N4_01410" coditem="01410" type="text" value="0,0000" aria-describedby="n4addon01410" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01410" style="cursor:pointer;" onclick="showContent('#N4_01410')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01410">N5</span>
+															<input class="form-control" id="N5_01410" coditem="01410" type="text" value="0,0000" aria-describedby="n5addon01410" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01410" style="cursor:pointer;" onclick="showContent('#N5_01410')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div></div></div><div id="bloco_01500" peso="0000" descniv="" optaplic="" nomebloco="DEMAIS METAS" class="panel panel-default"><div class="panel-heading" data-target="#nivel_01500" data-toggle="collapse" role="button" aria-expanded="true"><img id="spnBotao_01500" src="/tj/siume/imagem/elemento/menos_transparente.png" style="margin-top:-3px;margin-right:2px;"><strong>DEMAIS METAS</strong><div id="peso_01500" class="pull-right">00,00%
+													</div></div><div id="nivel_01500" cdnivel="01500" class="panel-body expandido collapse in" aria-expanded="true"><div class="col-xs-12" style="font-size:12px;">
+    <div class="row">
+		<div class="col-xs-12" style="color:#848AB3;">
+			<strong>Legenda:</strong>
+			<ul class="list-unstyled">
+				<li>N1 - Não cumpriu o desafio contratado;</li>
+				<li>N2 - Cumpriu parcialmente o desafio contratado;</li>
+				<li>N3 - Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado);</li>
+				<li>N4 - Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado);</li>
+				<li>N5 - Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado).</li>
+			</ul>
+		</div>
+	</div> 
+	<div class="row">
+		<div class="col-xs-12">
+			<table class="table table-bordered table-condensed" style="font-size:12px;">
+				<thead style="background-color:#E6E6E6;">
+					<tr>
+						<th>Metas</th>
+						<th class="text-center">Peso %</th>
+						<th class="text-center">Registro dos Ns</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr coditem="01501" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="01">
+							<td width="55%">
+								<textarea id="txtArea_01501" name="txtArea_01501" coditem="01501" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)">teste
+</textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01501" name="peso_01501" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01501" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01501">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01501" id="rdoNumerico_01501" name="rdoTipoNivelAtingimento_01501" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01501');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01501" id="rdoTexto_01501" name="rdoTipoNivelAtingimento_01501" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01501');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01501">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01501">N1</span>
+															<input class="form-control" id="N1_01501" coditem="01501" type="text" value="0,0000" aria-describedby="n1addon01501" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01501" style="cursor:pointer;" onclick="showContent('#N1_01501')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01501">N2</span>
+															<input class="form-control" id="N2_01501" coditem="01501" type="text" value="0,0000" aria-describedby="n2addon01501" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01501" style="cursor:pointer;" onclick="showContent('#N2_01501')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01501">N3</span>
+															<input class="form-control" id="N3_01501" coditem="01501" type="text" value="0,0000" aria-describedby="n3addon01501" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01501" style="cursor:pointer;" onclick="showContent('#N3_01501')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01501">N4</span>
+															<input class="form-control" id="N4_01501" coditem="01501" type="text" value="0,0000" aria-describedby="n4addon01501" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01501" style="cursor:pointer;" onclick="showContent('#N4_01501')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01501">N5</span>
+															<input class="form-control" id="N5_01501" coditem="01501" type="text" value="0,0000" aria-describedby="n5addon01501" onfocus="campoAtingimento_OnFocus(this);" onblur="campoAtingimento_OnBlur(this);" onkeydown="tratarCampoNumerico(this, false);" onkeyup="verificarConteudoCampoNumericoDecimal(this,true,4);">
+															<span class="input-group-addon" id="n3addon01501" style="cursor:pointer;" onclick="showContent('#N5_01501')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01502" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01502" name="txtArea_01502" coditem="01502" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01502" name="peso_01502" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01502" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01502">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01502" id="rdoNumerico_01502" name="rdoTipoNivelAtingimento_01502" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01502');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01502" id="rdoTexto_01502" name="rdoTipoNivelAtingimento_01502" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01502');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01502">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01502">N1</span>
+															<input class="form-control" id="N1_01502" coditem="01502" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01502" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01502" style="cursor:pointer;" onclick="showContent('#N1_01502')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01502">N2</span>
+															<input class="form-control" id="N2_01502" coditem="01502" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01502" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01502" style="cursor:pointer;" onclick="showContent('#N2_01502')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01502">N3</span>
+															<input class="form-control" id="N3_01502" coditem="01502" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01502" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01502" style="cursor:pointer;" onclick="showContent('#N3_01502')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01502">N4</span>
+															<input class="form-control" id="N4_01502" coditem="01502" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01502" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01502" style="cursor:pointer;" onclick="showContent('#N4_01502')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01502">N5</span>
+															<input class="form-control" id="N5_01502" coditem="01502" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01502" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01502" style="cursor:pointer;" onclick="showContent('#N5_01502')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01503" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01503" name="txtArea_01503" coditem="01503" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01503" name="peso_01503" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01503" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01503">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01503" id="rdoNumerico_01503" name="rdoTipoNivelAtingimento_01503" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01503');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01503" id="rdoTexto_01503" name="rdoTipoNivelAtingimento_01503" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01503');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01503">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01503">N1</span>
+															<input class="form-control" id="N1_01503" coditem="01503" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01503" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01503" style="cursor:pointer;" onclick="showContent('#N1_01503')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01503">N2</span>
+															<input class="form-control" id="N2_01503" coditem="01503" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01503" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01503" style="cursor:pointer;" onclick="showContent('#N2_01503')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01503">N3</span>
+															<input class="form-control" id="N3_01503" coditem="01503" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01503" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01503" style="cursor:pointer;" onclick="showContent('#N3_01503')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01503">N4</span>
+															<input class="form-control" id="N4_01503" coditem="01503" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01503" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01503" style="cursor:pointer;" onclick="showContent('#N4_01503')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01503">N5</span>
+															<input class="form-control" id="N5_01503" coditem="01503" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01503" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01503" style="cursor:pointer;" onclick="showContent('#N5_01503')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01504" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01504" name="txtArea_01504" coditem="01504" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01504" name="peso_01504" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01504" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01504">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01504" id="rdoNumerico_01504" name="rdoTipoNivelAtingimento_01504" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01504');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01504" id="rdoTexto_01504" name="rdoTipoNivelAtingimento_01504" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01504');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01504">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01504">N1</span>
+															<input class="form-control" id="N1_01504" coditem="01504" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01504" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01504" style="cursor:pointer;" onclick="showContent('#N1_01504')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01504">N2</span>
+															<input class="form-control" id="N2_01504" coditem="01504" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01504" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01504" style="cursor:pointer;" onclick="showContent('#N2_01504')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01504">N3</span>
+															<input class="form-control" id="N3_01504" coditem="01504" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01504" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01504" style="cursor:pointer;" onclick="showContent('#N3_01504')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01504">N4</span>
+															<input class="form-control" id="N4_01504" coditem="01504" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01504" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01504" style="cursor:pointer;" onclick="showContent('#N4_01504')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01504">N5</span>
+															<input class="form-control" id="N5_01504" coditem="01504" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01504" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01504" style="cursor:pointer;" onclick="showContent('#N5_01504')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01505" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01505" name="txtArea_01505" coditem="01505" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01505" name="peso_01505" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01505" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01505">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01505" id="rdoNumerico_01505" name="rdoTipoNivelAtingimento_01505" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01505');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01505" id="rdoTexto_01505" name="rdoTipoNivelAtingimento_01505" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01505');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01505">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01505">N1</span>
+															<input class="form-control" id="N1_01505" coditem="01505" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01505" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01505" style="cursor:pointer;" onclick="showContent('#N1_01505')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01505">N2</span>
+															<input class="form-control" id="N2_01505" coditem="01505" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01505" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01505" style="cursor:pointer;" onclick="showContent('#N2_01505')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01505">N3</span>
+															<input class="form-control" id="N3_01505" coditem="01505" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01505" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01505" style="cursor:pointer;" onclick="showContent('#N3_01505')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01505">N4</span>
+															<input class="form-control" id="N4_01505" coditem="01505" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01505" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01505" style="cursor:pointer;" onclick="showContent('#N4_01505')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01505">N5</span>
+															<input class="form-control" id="N5_01505" coditem="01505" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01505" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01505" style="cursor:pointer;" onclick="showContent('#N5_01505')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01506" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01506" name="txtArea_01506" coditem="01506" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01506" name="peso_01506" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01506" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01506">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01506" id="rdoNumerico_01506" name="rdoTipoNivelAtingimento_01506" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01506');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01506" id="rdoTexto_01506" name="rdoTipoNivelAtingimento_01506" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01506');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01506">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01506">N1</span>
+															<input class="form-control" id="N1_01506" coditem="01506" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01506" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01506" style="cursor:pointer;" onclick="showContent('#N1_01506')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01506">N2</span>
+															<input class="form-control" id="N2_01506" coditem="01506" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01506" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01506" style="cursor:pointer;" onclick="showContent('#N2_01506')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01506">N3</span>
+															<input class="form-control" id="N3_01506" coditem="01506" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01506" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01506" style="cursor:pointer;" onclick="showContent('#N3_01506')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01506">N4</span>
+															<input class="form-control" id="N4_01506" coditem="01506" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01506" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01506" style="cursor:pointer;" onclick="showContent('#N4_01506')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01506">N5</span>
+															<input class="form-control" id="N5_01506" coditem="01506" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01506" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01506" style="cursor:pointer;" onclick="showContent('#N5_01506')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01507" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01507" name="txtArea_01507" coditem="01507" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01507" name="peso_01507" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01507" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01507">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01507" id="rdoNumerico_01507" name="rdoTipoNivelAtingimento_01507" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01507');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01507" id="rdoTexto_01507" name="rdoTipoNivelAtingimento_01507" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01507');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01507">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01507">N1</span>
+															<input class="form-control" id="N1_01507" coditem="01507" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01507" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01507" style="cursor:pointer;" onclick="showContent('#N1_01507')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01507">N2</span>
+															<input class="form-control" id="N2_01507" coditem="01507" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01507" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01507" style="cursor:pointer;" onclick="showContent('#N2_01507')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01507">N3</span>
+															<input class="form-control" id="N3_01507" coditem="01507" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01507" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01507" style="cursor:pointer;" onclick="showContent('#N3_01507')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01507">N4</span>
+															<input class="form-control" id="N4_01507" coditem="01507" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01507" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01507" style="cursor:pointer;" onclick="showContent('#N4_01507')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01507">N5</span>
+															<input class="form-control" id="N5_01507" coditem="01507" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01507" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01507" style="cursor:pointer;" onclick="showContent('#N5_01507')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01508" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01508" name="txtArea_01508" coditem="01508" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01508" name="peso_01508" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01508" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01508">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01508" id="rdoNumerico_01508" name="rdoTipoNivelAtingimento_01508" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01508');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01508" id="rdoTexto_01508" name="rdoTipoNivelAtingimento_01508" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01508');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01508">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01508">N1</span>
+															<input class="form-control" id="N1_01508" coditem="01508" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01508" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01508" style="cursor:pointer;" onclick="showContent('#N1_01508')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01508">N2</span>
+															<input class="form-control" id="N2_01508" coditem="01508" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01508" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01508" style="cursor:pointer;" onclick="showContent('#N2_01508')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01508">N3</span>
+															<input class="form-control" id="N3_01508" coditem="01508" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01508" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01508" style="cursor:pointer;" onclick="showContent('#N3_01508')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01508">N4</span>
+															<input class="form-control" id="N4_01508" coditem="01508" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01508" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01508" style="cursor:pointer;" onclick="showContent('#N4_01508')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01508">N5</span>
+															<input class="form-control" id="N5_01508" coditem="01508" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01508" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01508" style="cursor:pointer;" onclick="showContent('#N5_01508')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01509" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01509" name="txtArea_01509" coditem="01509" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01509" name="peso_01509" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01509" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01509">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01509" id="rdoNumerico_01509" name="rdoTipoNivelAtingimento_01509" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01509');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01509" id="rdoTexto_01509" name="rdoTipoNivelAtingimento_01509" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01509');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01509">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01509">N1</span>
+															<input class="form-control" id="N1_01509" coditem="01509" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01509" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01509" style="cursor:pointer;" onclick="showContent('#N1_01509')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01509">N2</span>
+															<input class="form-control" id="N2_01509" coditem="01509" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01509" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01509" style="cursor:pointer;" onclick="showContent('#N2_01509')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01509">N3</span>
+															<input class="form-control" id="N3_01509" coditem="01509" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01509" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01509" style="cursor:pointer;" onclick="showContent('#N3_01509')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01509">N4</span>
+															<input class="form-control" id="N4_01509" coditem="01509" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01509" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01509" style="cursor:pointer;" onclick="showContent('#N4_01509')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01509">N5</span>
+															<input class="form-control" id="N5_01509" coditem="01509" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01509" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01509" style="cursor:pointer;" onclick="showContent('#N5_01509')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr coditem="01510" codrelevancia="2" cdtptex="02" codescala="08" status="01" tiponivel="02">
+							<td width="55%">
+								<textarea id="txtArea_01510" name="txtArea_01510" coditem="01510" class="form-control" style="width: 100%; min-height: 245px; height: 272px;" onfocus="txtMetas_OnFocus(this)" onblur="txtMetas_OnBlur(this)" onkeyup="textCounter(this,800)"></textarea>
+							</td>
+							<td class="text-center" width="20%" style="vertical-align:middle;">
+									<input id="peso_01510" name="peso_01510" class="text-center" onfocus="txtPeso_OnFocus(this)" onblur="txtPeso_OnBlur(this,'5','100')" onkeydown="tratarCampoNumerico(this, false)" maxlength="6" size="6" value="00,00" coditem="01510" pesomin="5" pesomax="100">
+							</td>
+							<td width="25%">
+								<div class="panel panel-default" style="padding:0;margin-bottom:0;">
+									<div class="panel-heading" style="background-color:#D2DCF0;">
+											<div id="atingimento_01510">
+												<div class="input-group input-group-sm">
+													<span class="input-group-addon">
+														<input type="radio" coditem="01510" id="rdoNumerico_01510" name="rdoTipoNivelAtingimento_01510" style="margin-top:0;" onclick="tipoAtingimento_OnClick(this,'01510');">
+													</span>
+													<span class="form-control">Avaliação Quantitativa</span>
+												</div>
+													<div class="input-group input-group-sm">
+														<span class="input-group-addon">
+															<input type="radio" coditem="01510" id="rdoTexto_01510" name="rdoTipoNivelAtingimento_01510" style="margin-top:0;" checked="true" onclick="tipoAtingimento_OnClick(this,'01510');">
+														</span>
+														<span class="form-control">Avaliação Qualitativa</span>
+													</div>
+											</div>
+									</div>
+									<div class="panel-body">
+										<div class="col-xs-12">
+											<div id="tipoAtingimentoConteudo_01510">
+												<ul class="list-unstyled">
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n1addon01510">N1</span>
+															<input class="form-control" id="N1_01510" coditem="01510" type="text" value="Não cumpriu o desafio contratado" aria-describedby="n1addon01510" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01510" style="cursor:pointer;" onclick="showContent('#N1_01510')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n2addon01510">N2</span>
+															<input class="form-control" id="N2_01510" coditem="01510" type="text" value="Cumpriu parcialmente o desafio contratado" aria-describedby="n2addon01510" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01510" style="cursor:pointer;" onclick="showContent('#N2_01510')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n3addon01510">N3</span>
+															<input class="form-control" id="N3_01510" coditem="01510" type="text" value="Cumpriu de forma efetiva o desafio contratado (80% de chance de ser alcançado)" aria-describedby="n3addon01510" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01510" style="cursor:pointer;" onclick="showContent('#N3_01510')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n4addon01510">N4</span>
+															<input class="form-control" id="N4_01510" coditem="01510" type="text" value="Superou de forma efetiva o desafio contratado (30% de chance de ser alcançado)" aria-describedby="n4addon01510" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01510" style="cursor:pointer;" onclick="showContent('#N4_01510')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+													<li>
+														<div class="input-group input-group-sm">
+															<span class="input-group-addon" id="n5addon01510">N5</span>
+															<input class="form-control" id="N5_01510" coditem="01510" type="text" value="Superou de forma excepcional o desafio contratado (apenas 10% de chance de ser alcançado)" aria-describedby="n5addon01510" onkeypress="verificaCaracter(this);">
+															<span class="input-group-addon" id="n3addon01510" style="cursor:pointer;" onclick="showContent('#N5_01510')">
+																<img src="/tj/siume/imagem/formularios/expandirTexto.png">
+															</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div></div></div></div></div></div></div><div class="col-xs-12"><div class="panel"><div style="border:1px dotted #C8C8C8;background-color:#F0F0F0;padding:10px;" class="panel-body"><div class="center-block text-center"><ul style="margin:0;" class="list-unstyled list-inline"><li><span data-id="formPreenchimentoEixoX2016.campo.legenda_caixas" class="unidadesExternas">Legenda</span></li><li><img style="margin-top:-3px;margin-right:2px;" src="/tj/siume/imagem/elemento/mais[g].png"><span id="_formPreenchimentoEixoX2.campo.preenchido" class="unidadesExternas">Preenchido</span></li><li><img style="margin-top:-3px;margin-right:2px;" src="/tj/siume/imagem/elemento/mais.png"><span id="_formPreenchimentoEixoX2.campo.parcialmente_preenchido" class="unidadesExternas">Parcialmente Preenchido</span></li></ul></div></div></div></div><div class="col-xs-12"><div style="margin-top:5px;" id="areaBotoes" class="areaBotoes text-center"><input onclick="JavaScript:voltarMembroAtividades();" value="Voltar" data-id="formPreenchimentoEixoX.botao.voltar" class="btn btn-default unidadesExternas" type="button"><input onclick="verificarPermissao(document.forms[0].usuarioEA.value, document.forms[0].usuarioTR.value, document.forms[0].usuarioTR.value, '000000804', gravarFormulario, [false]);" value="Gravar Formulário" data-id="formPreenchimentoEixoX.botao.gravar_formulario" class="btn btn-default unidadesExternas" type="button" id="gravar"><input onclick="verificarPermissao(document.forms[0].usuarioEA.value, document.forms[0].usuarioTR.value, document.forms[0].usuarioTR.value, '000000805', enviarFormulario, ['']);" value="Enviar Formulário Para Aprovação" data-id="formPreenchimentoEixoX.botao.enviar_form_avaliacao" class="btn btn-default unidadesExternas" type="button" id="enviar"><input style="display: none;" onclick="verificarPermissao(document.forms[0].usuarioEA.value, document.forms[0].usuarioTR.value, document.forms[0].usuarioTR.value, '000000810', cancelarEnvio, ['']);" value="Cancelar Envio" data-id="formPreenchimentoEixoX.botao.cancelar_envio" class="btn btn-default unidadesExternas" type="button" id="btCancelarEnvio"></div></div></div><div id="modalDialog" role="dialog" tabindex="-1" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h4 class="modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"></div></div></div></div><form name="listaAvaliacaoFuncionariosFormX" method="POST"><input value="01" name="situacaoFormulario" id="situacaoFormulario" type="hidden"><input value="01" name="tipoExib" id="tipoExib" type="hidden"><input value="000" name="erros" id="erros" type="hidden"><input value="001" name="etapa" id="etapa" type="hidden"><input value="007293913" name="usuarioEA" id="usuarioEA" type="hidden"><input value="007293913" name="usuarioTR" id="usuarioTR" type="hidden"><input value="" name="senha" id="senha" type="hidden"><input value="" name="terminal" id="terminal" type="hidden"><input value="NOPAR" name="telaOri" id="telaOri" type="hidden"><input value="000001" name="codAvaliacao" id="codAvaliacao" type="hidden"><input value="01" name="cdTpAval" id="cdTpAval" type="hidden"><input value="00001" name="cdModel" id="cdModel" type="hidden"><input value="00001" name="cdVersa" id="cdVersa" type="hidden"><input value="002002" name="cdVisao" id="cdVisao" type="hidden"><input value="00001" name="nmSequen" id="nmSequen" type="hidden"><input value="N" name="indGestor" id="indGestor" type="hidden"><input value="2016" name="anoBase" id="anoBase" type="hidden"><input value="NOPAR" name="telaOri" id="telaOri" type="hidden"><input value="pt" name="codidiom" id="codidiom" type="hidden"><input value="" name="txtLivre" id="txtLivre" type="hidden"><input value="G" name="origemLink" id="origemLink" type="hidden"><input value="3" name="passo" id="passo" type="hidden"><input value="007293913" name="numFuncionalAvaliado" id="numFuncionalAvaliado" type="hidden"><input value="007293913" name="numfuncr" id="numfuncr" type="hidden"><input value="" name="dscTxtLv" id="dscTxtLv" type="hidden"><input value="" name="cdtippar" id="cdtippar" type="hidden"><input value="" name="numPag" id="numPag" type="hidden"><input value="" name="ultPag" id="ultPag" type="hidden"><input value="" name="statusAvaliado" id="statusAvaliado" type="hidden"><input value="" name="imprimir" id="imprimir" type="hidden"><input value="4" name="perfil" id="perfil" type="hidden"><input value="01500" name="codItem" id="codItem" type="hidden"><input value="" name="conteudo" id="conteudo" type="hidden"><input value="007293913" name="funcional" id="funcional" type="hidden"></form></div><div style="display:none;" class="clsProcessando2" id="aguarde"><div style="position:absolute;left:2px;top:5px;"><img alt="Loading" src="/tj/siume/imagem/loading.gif"></div><div style="position:absolute;left:45px;top:15px;"><b>Por favor, aguarde...</b></div></div><script src="/tj/siume/app/bundle/autoNumeric.js" type="text/javascript"></script><script src="/tj/siume/app/bundle/jquery.json.js" type="text/javascript"></script><script src="/tj/siume/app/bundle/jquery.mask.js" type="text/javascript"></script><script src="/tj/siume/js/bootstrap.js" type="text/javascript"></script><script src="/tj/siume/js/lib/handlebars-v4.0.5.js" type="text/javascript"></script><script src="/tj/siume/js/lib/handlebars-helper-x.js" type="text/javascript"></script><script src="/tj/siume/js/lib/jquery.maskMoney.js" type="text/javascript"></script><script src="/tj/siume/js/lib/xml2json.js" type="text/javascript"></script><script src="/tj/siume/js/Ajax.js" type="text/javascript"></script><script type="text/javascript" src="/tj/siume/js/formularios/preenchimento/formulario2016.js"></script><script type="text/javascript" src="/tj/siume/js/funcoesLog.js"></script><script type="text/javascript"><!--
+				function getContextPath() {
+					return '/tj/siume';
+				}
+				var statusFormulario = '01';
+				function esconder() {
+					escondeAguarde();
+				}
+				$(document).ready(function() {
+					if(document['impAnt']) {
+						changeImage('impAnt', '/tj/siume/imagem/icones/impressao_out_ctr_ant_'+idioma+'.gif');
+						$('img[name=impAnt]')
+							.mouseover(function(){
+								changeImage('impAnt', '/tj/siume/imagem/icones/impressao_over_ctr_ant_'+idioma+'.gif');
+							})
+							.mouseout(function(){
+								changeImage('impAnt', '/tj/siume/imagem/icones/impressao_out_ctr_ant_'+idioma+'.gif');
+							})
+							.mousedown(function(){
+								changeImage('impAnt', '/tj/siume/imagem/icones/impressao_down_ctr_ant_'+idioma+'.gif');
+							});
+					}
+					
+				});
+			--></script><div id="popoverError"><div role="tooltip" class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content text-danger"></div></div></div><div id="___ajax_wait_div" style="border: 2px solid silver; width: 150px; height: 50px; font-family: Verdana; font-size: 18px; color: purple; position: absolute; top: 445px; left: 275px; display: none; background-color: white;"><span style="background-image: url(/tj/siume/imagem/loading.gif);background-repeat:no-repeat;width:32px;height:32px;position:absolute;top:8px;left:5px;">&nbsp;</span><span style="position:relative;left:20px;top:10px;">Aguarde...</span></div></body></html>
