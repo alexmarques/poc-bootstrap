@@ -49,7 +49,7 @@ public class HeaderExample {
 				ct.setSimpleColumn(nome, 36, 36, PageSize.A4.width() - 36, PageSize.A4.height() - 36, 0,
 						PdfPCell.ALIGN_LEFT);
 				ct.go();
-				ct.setSimpleColumn(new Phrase("Eliana de Carvalho Palmieri"), 100, 36, PageSize.A4.width() - 36,
+				ct.setSimpleColumn(new Phrase("Fulano de Tal"), 100, 36, PageSize.A4.width() - 36,
 						PageSize.A4.height() - 36, 0, PdfPCell.ALIGN_LEFT);
 				ct.go();
 				ct.setSimpleColumn(funcional, 36, 55, PageSize.A4.width() - 36, PageSize.A4.height() - 55, 0,
@@ -61,7 +61,7 @@ public class HeaderExample {
 				ct.setSimpleColumn(gestor, 36, 74, PageSize.A4.width() - 36, PageSize.A4.height() - 74, 0,
 						PdfPCell.ALIGN_LEFT);
 				ct.go();
-				ct.setSimpleColumn(new Phrase("Angélica Simioni"), 100, 74, PageSize.A4.width() - 36,
+				ct.setSimpleColumn(new Phrase("Ciclano"), 100, 74, PageSize.A4.width() - 36,
 						PageSize.A4.height() - 74, 0, PdfPCell.ALIGN_LEFT);
 				ct.go();
 				ct.setSimpleColumn(anoBase, 36, 93, PageSize.A4.width() - 36, PageSize.A4.height() - 93, 0,
